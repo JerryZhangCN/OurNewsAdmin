@@ -1,4 +1,4 @@
-package com.example.peter.ournewsadmin;
+package com.example.peter.newsadmin;
 
 import org.junit.Test;
 
