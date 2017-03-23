@@ -9,9 +9,12 @@
     <dimen name="login_card">60dp</dimen>
     <dimen name="login_hint">8dp</dimen>
     <dimen name="public_login_weight">40dp</dimen>
-    
-    
-    
+    <dimen name="home_tab">30dp</dimen>
+    <dimen name="user_button">150dp</dimen>
+    <dimen name="user_cardview">32dp</dimen>
+    <dimen name="small_hint">3dp</dimen>
+
+
     <!-- 字号 -->
     <dimen name="textSize22px">11sp</dimen>
     <dimen name="textSize24px">12sp</dimen>

@@ -1,0 +1,665 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.example.peter.newsadmin.fragment.UserFragment">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/user_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:background="@color/blue">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/activity_horizontal_margin"
+                android:layout_height="@dimen/activity_horizontal_margin"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/login_hint"
+                android:layout_toLeftOf="@+id/text_setting"
+                app:srcCompat="@drawable/ic_settings_white_24dp" />
+
+            <TextView
+                android:id="@+id/text_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:padding="1dp"
+                android:text="@string/setting"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize28px" />
+        </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/user_button"
+        android:layout_below="@+id/user_top_bar"
+        android:background="@color/blue"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/topbar_height"
+                android:layout_weight="1"
+                android:background="@drawable/public_button_shape"
+                android:text="@string/login"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/textSize26px" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/topbar_height"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_hint"
+                    android:text="@string/phone_register"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize22px" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/activity_horizontal_margin"
+                    android:layout_height="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/ic_chevron_right_white" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/topbar_height"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/public_user_title_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/login_hint">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        app:srcCompat="@drawable/ic_sign_white_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/login_hint"
+                        android:text="@string/sign"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize22px" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/remind_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/activity_horizontal_margin"
+                    android:layout_height="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/ic_caledar_white_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_hint"
+                    android:text="@string/calader"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize22px" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/login_hint"
+                android:layout_marginTop="@dimen/login_hint"
+                android:background="@color/white"></View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/activity_horizontal_margin"
+                    android:layout_height="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/ic_smile_white_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_hint"
+                    android:text="@string/good"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize22px" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/login_hint"
+                android:layout_marginTop="@dimen/login_hint"
+                android:background="@color/white"></View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/activity_horizontal_margin"
+                    android:layout_height="@dimen/activity_horizontal_margin"
+                    app:srcCompat="@drawable/ic_invation_white_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_hint"
+                    android:text="@string/invation"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize22px" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="146dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_editText_hight"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/my_follow"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSize28px" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/my_fans"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/textSize28px" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_card"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_subscribe_gary_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/small_hint"
+                        android:text="@string/subscribe"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textSize22px" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/login_hint"
+                    android:layout_marginTop="@dimen/login_hint"
+                    android:background="@color/gray"></View>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_collection_gary_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/small_hint"
+                        android:text="@string/collection"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textSize22px" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/login_hint"
+                    android:layout_marginTop="@dimen/login_hint"
+                    android:background="@color/gray"></View>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_comment_gary_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/small_hint"
+                        android:text="@string/comment"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textSize22px" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0.1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/login_hint"
+                    android:layout_marginTop="@dimen/login_hint"
+                    android:background="@color/gray"></View>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_read_gary_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/small_hint"
+                        android:text="@string/read"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/textSize22px" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <ScrollView
+        android:layout_marginTop="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/login_hint"
+        android:layout_marginRight="@dimen/login_hint">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/login_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_editText_hight"
+                    android:orientation="horizontal">
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_messages_blue_24dp"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/small_hint"
+                        android:text="@string/my_message"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize28px"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="@dimen/activity_horizontal_margin"
+                        android:layout_height="@dimen/activity_horizontal_margin"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_chevron_right_gray"
+                        android:layout_marginRight="@dimen/login_hint"/>
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/login_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_messages_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/my_message"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/login_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_messages_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/my_message"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/login_editText_hight"
+                        android:orientation="horizontal">
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingTop="@dimen/small_hint"
+                            android:text="@string/new_dynamic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/textSize28px"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="@dimen/activity_horizontal_margin"
+                            android:layout_height="@dimen/activity_horizontal_margin"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_chevron_right_gray"
+                            android:layout_marginRight="@dimen/login_hint"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

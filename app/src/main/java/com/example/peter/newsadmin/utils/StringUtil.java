@@ -1,4 +1,4 @@
-package com.example.peter.newsadmin.common;
+package com.example.peter.newsadmin.utils;
 
 /**
  * Created by peter on 22/3/2017.

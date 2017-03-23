@@ -63,7 +63,7 @@
                         android:layout_height="@dimen/public_hint"
                         android:layout_gravity="center"
                         android:layout_margin="@dimen/login_hint"
-                        app:srcCompat="@drawable/ic_user_logo_24dp" />
+                        app:srcCompat="@drawable/ic_user_logo_gray_24dp" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                android:layout_width="@dimen/public_hint"
                android:layout_height="@dimen/public_hint"
                android:layout_alignParentRight="true"
-               app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+               app:srcCompat="@drawable/ic_chevron_right_white"
                />
        </RelativeLayout>
     </LinearLayout>
