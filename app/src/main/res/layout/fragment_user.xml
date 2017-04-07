@@ -53,15 +53,17 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_user_login"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/topbar_height"
                 android:layout_weight="1"
-                android:background="@drawable/public_button_shape"
+                android:background="@drawable/public_user_btn_shape"
                 android:text="@string/login"
-                android:textColor="@color/blue"
+                android:textColor="@drawable/public_button_text_color"
                 android:textSize="@dimen/textSize26px" />
 
             <LinearLayout
+                android:id="@+id/btn_user_register"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/topbar_height"
                 android:layout_weight="1"

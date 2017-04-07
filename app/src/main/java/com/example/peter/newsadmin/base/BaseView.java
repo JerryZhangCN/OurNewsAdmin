@@ -24,6 +24,8 @@ public interface BaseView {
     /**
      *  显示一般信息
      */
+    void showInfo(String msg);
+
     void showInfo(int type, String msg);
 
     /**

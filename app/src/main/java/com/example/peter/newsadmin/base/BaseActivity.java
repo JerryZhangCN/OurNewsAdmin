@@ -9,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.peter.newsadmin.R;
+import com.example.peter.newsadmin.common.vew.CustomToast;
+import com.example.peter.newsadmin.common.vew.MyProgressDialog;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 
 import butterknife.ButterKnife;
@@ -19,14 +22,14 @@ import butterknife.ButterKnife;
  * Created by peter on 22/3/2017.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
-
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+    private MyProgressDialog mProgressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initTopBar();
         hideStatusBar();
-        initLogic();
+//        initLogic();
     }
 
     @TargetApi(19)
@@ -76,9 +79,65 @@ public abstract class BaseActivity extends AppCompatActivity {
             window.setNavigationBarColor(Color.TRANSPARENT);
         }
     }
-
+    /**
+     * 进度对话框是否显示
+     * @return
+     */
+    public final boolean isProgressShowing() {
+        if(mProgressDialog != null) {
+            return mProgressDialog.isShowing();
+        } else {
+            return false;
+        }
+    }
 
     protected void initLogic(){
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void showInfo(String msg) {
+        CustomToast.show(msg, Toast.LENGTH_SHORT);
+
+    }
+
+    @Override
+    public void showLoadingDialog() {
+
+        if (mProgressDialog == null) {
+            mProgressDialog = new MyProgressDialog(this);
+//			mProgressDialog.setMsg("请稍后");
+        }
+        mProgressDialog.setCanceledOnTouchOutside(false);
+//		mProgressDialog.setOnCancelListener(mCancel);
+
+        if(!isFinishing())
+            mProgressDialog.show();
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        if (this.isProgressShowing())
+            mProgressDialog.dismiss();
+    }
+
+    @Override
+    public void showError(int type, String errorMsg) {
+
+    }
+
+    @Override
+    public void showInfo(int type, String msg) {
+
+    }
+
+    @Override
+    public void dismissError() {
+
+    }
+
+    @Override
+    public void initTopbar() {
+
     }
 }

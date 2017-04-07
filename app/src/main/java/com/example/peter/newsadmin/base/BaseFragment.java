@@ -71,7 +71,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public abstract  void renderFragment();
 
     @Override
-    public void showInfo(int type,String msg) {
+    public void showInfo(int type, String msg) {
         switch (type) {
             case StatusCode.SHOW_INFO_TOAST:
                 CustomToast.show(msg, Toast.LENGTH_SHORT);
@@ -140,4 +140,24 @@ Log.e(BizConfClientConfig.DEBUG_TAG,"fragment显示 ："+this.getClass().getName
             MobclickAgent.onPageStart(this.getClass().getName());
         }
     }*/
+
+    @Override
+    public void showLoadingDialog() {
+
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+
+    }
+
+    @Override
+    public void showError(int type, String errorMsg) {
+
+    }
+
+    @Override
+    public void showInfo(String msg) {
+
+    }
 }
