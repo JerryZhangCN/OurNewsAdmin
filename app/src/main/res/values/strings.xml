@@ -4,6 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="plealse_wait">请稍后</string>
+    <string name="loading_failed">数据加载失败</string>
     <!-- LOGIN -->
     <string name="login">登录</string>
     <string name="login_name_hint">账号/手机号</string>

@@ -21,4 +21,10 @@
         <item name="android:windowBackground">@color/transparent_black</item>
     </style>
 
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#0099FF</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabSelectedTextColor">@color/blue</item>
+    </style>
+
 </resources>

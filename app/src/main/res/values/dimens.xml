@@ -13,6 +13,7 @@
     <dimen name="user_button">150dp</dimen>
     <dimen name="user_cardview">32dp</dimen>
     <dimen name="small_hint">3dp</dimen>
+    <dimen name="news_pic_hight">100dp</dimen>
 
 
     <!-- 字号 -->
