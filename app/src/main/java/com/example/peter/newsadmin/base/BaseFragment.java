@@ -158,6 +158,6 @@ Log.e(BizConfClientConfig.DEBUG_TAG,"fragment显示 ："+this.getClass().getName
 
     @Override
     public void showInfo(String msg) {
-
+      CustomToast.show(msg, Toast.LENGTH_SHORT);
     }
 }

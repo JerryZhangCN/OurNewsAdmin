@@ -38,4 +38,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.8.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'me.relex:photodraweeview:1.1.2'
 }

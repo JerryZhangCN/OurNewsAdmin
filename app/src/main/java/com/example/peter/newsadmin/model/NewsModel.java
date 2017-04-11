@@ -7,20 +7,24 @@ import android.graphics.Bitmap;
  */
 
 public class NewsModel {
-    private int id;
+    private long id;
     private String title;
     private String cover;
-//    private String abstract;
-    private String create_time;
+    private String abstractContent;
+    private String content;
+    private String createTime;
     private int type;
+    private int is_collected;
+    private int comment_num;
+    private int history_num;
+    private int collection_num;
     private Manager manager;
-    private Bitmap image;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -40,12 +44,28 @@ public class NewsModel {
         this.cover = cover;
     }
 
-    public String getCreate_time() {
-        return create_time;
+    public String getAbstractContent() {
+        return abstractContent;
     }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
+    public void setAbstractContent(String abstractContent) {
+        this.abstractContent = abstractContent;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public int getType() {
@@ -56,19 +76,43 @@ public class NewsModel {
         this.type = type;
     }
 
+    public int getIs_collected() {
+        return is_collected;
+    }
+
+    public void setIs_collected(int is_collected) {
+        this.is_collected = is_collected;
+    }
+
+    public int getComment_num() {
+        return comment_num;
+    }
+
+    public void setComment_num(int comment_num) {
+        this.comment_num = comment_num;
+    }
+
+    public int getHistory_num() {
+        return history_num;
+    }
+
+    public void setHistory_num(int history_num) {
+        this.history_num = history_num;
+    }
+
+    public int getCollection_num() {
+        return collection_num;
+    }
+
+    public void setCollection_num(int collection_num) {
+        this.collection_num = collection_num;
+    }
+
     public Manager getManager() {
         return manager;
     }
 
     public void setManager(Manager manager) {
         this.manager = manager;
-    }
-
-    public Bitmap getImage() {
-        return image;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.peter.newsadmin.present;
+package com.example.peter.newsadmin.present.presentImpl;
 
 import android.util.Log;
 
@@ -12,6 +12,7 @@ import com.example.peter.newsadmin.model.HomeNewsModel;
 import com.example.peter.newsadmin.model.NewsModel;
 import com.example.peter.newsadmin.model.RequestModel;
 import com.example.peter.newsadmin.model.TypeNewsMode;
+import com.example.peter.newsadmin.present.presentView.PageFragmentView;
 import com.example.peter.newsadmin.utils.StringUtil;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,7 +29,6 @@ import okhttp3.Request;
 
 public class PageFragmentPresenter extends BasePresenter {
     private PageFragmentView view;
-    private List<TypeNewsMode> typeNewsModes = new ArrayList<>();
     private List<NewsModel> newsModels = new ArrayList<>();
 
     public PageFragmentPresenter(PageFragmentView _view) {
@@ -52,6 +52,7 @@ public class PageFragmentPresenter extends BasePresenter {
     }
 
     private void handMsg(List<TypeNewsMode> list) {
+        newsModels.clear();
         for (TypeNewsMode item : list) {
             for (int i = 0; i < item.getList().length; i++) {
                 this.newsModels.add(item.getList()[i]);

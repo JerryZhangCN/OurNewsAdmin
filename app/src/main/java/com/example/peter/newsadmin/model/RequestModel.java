@@ -7,6 +7,8 @@ package com.example.peter.newsadmin.model;
 public class RequestModel {
     private String name;
     private int type;
+    private long nid;//新闻Id
+    private long uid;//用户id
 
     public String getName() {
         return name;
@@ -22,5 +24,21 @@ public class RequestModel {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public long getNid() {
+        return nid;
+    }
+
+    public void setNid(long nid) {
+        this.nid = nid;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
     }
 }

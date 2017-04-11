@@ -2,8 +2,10 @@ package com.example.peter.newsadmin.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,11 @@ public class NewsFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pagerAdapter = new FragmentAdeptar(getChildFragmentManager(), getActivity());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,15 +45,24 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void initCommonLogic(View view) {
         super.initCommonLogic(view);
-        pagerAdapter = new FragmentAdeptar(getActivity().getSupportFragmentManager(), getActivity());
+       initViewPager();
+    }
+    private void initViewPager(){
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        viewPager.setOffscreenPageLimit(7);
+        pagerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void renderFragment() {
-
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        viewPager.setOffscreenPageLimit(7);
+        pagerAdapter.notifyDataSetChanged();
+        Log.e("主fragment执行重载","");
     }
 
     @Override
@@ -62,5 +78,11 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void showError(int type, String errorMsg) {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("主fragment执行销毁","");
     }
 }
