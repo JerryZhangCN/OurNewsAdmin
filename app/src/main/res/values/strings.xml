@@ -42,4 +42,8 @@
     <string name="read">阅读</string>
     <string name="my_message">我的消息</string>
     <string name="new_dynamic">最新动态</string>
+    <!-- 添加新闻 -->
+    <string name="add_news">推送新闻</string>
+    <string name="title">标题</string>
+    <string name="news_type">新闻类别</string>
 </resources>

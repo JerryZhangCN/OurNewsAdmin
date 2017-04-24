@@ -25,6 +25,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.zhy:okhttputils:2.6.2'
@@ -39,4 +45,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'me.relex:photodraweeview:1.1.2'
+    compile 'com.github.chenBingX:SuperTextView:v1.0'
 }

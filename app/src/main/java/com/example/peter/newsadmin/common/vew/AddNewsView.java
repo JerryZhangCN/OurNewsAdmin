@@ -2,6 +2,7 @@ package com.example.peter.newsadmin.common.vew;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewTextAndImageView extends LinearLayout {
+public class AddNewsView extends LinearLayout {
 
     private final String DIFFERENCE_STRING = "AozakiShiki";
 
@@ -32,29 +33,29 @@ public class NewTextAndImageView extends LinearLayout {
     private List<String> contents;
 
     private OnActionListener onActionListener;
+    private FloatingActionButton floatingActionButton;
 
     public interface OnActionListener {
         void onPhotoLoadEnd(View view, String photoName);
     }
 
-    public NewTextAndImageView(Context context) {
+    public AddNewsView(Context context) {
         super(context);
         init(context);
     }
 
-    public NewTextAndImageView(Context context, AttributeSet attrs) {
+    public AddNewsView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public NewTextAndImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AddNewsView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     private void init(Context context) {
         this.context = context;
-
         setOrientation(VERTICAL);
 
         contents = new ArrayList<>();
