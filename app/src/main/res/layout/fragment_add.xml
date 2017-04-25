@@ -33,6 +33,22 @@
                 android:text="@string/add_news"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize36px" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:layout_marginLeft="@dimen/public_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/type"
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dropdown"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/blue"
+                android:text="@string/add"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize32px"/>
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
   <android.support.design.widget.TextInputLayout
@@ -47,38 +63,8 @@
           android:hint="@string/title"
           android:maxLines="1" />
   </android.support.design.widget.TextInputLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@color/gray"></View>
-    <LinearLayout
+    <com.example.peter.newsadmin.common.vew.AddNewsView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/small_hint"
-        android:layout_marginBottom="@dimen/small_hint">
-        <com.coorchice.library.SuperTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/news_type"
-            app:text_stroke="true"
-            app:stroke_width="2dp"
-            app:stroke_color="@color/blue"
-            android:padding="@dimen/small_hint"
-            app:corner="5dp"/>
-        <View
-            android:layout_width="@dimen/login_editText_hight"
-            android:layout_height="match_parent"/>
-    <android.support.v7.widget.AppCompatSpinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/type"
-        android:spinnerMode="dropdown">
-    </android.support.v7.widget.AppCompatSpinner>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@color/gray"></View>
+        android:layout_marginBottom="@dimen/public_hint"></com.example.peter.newsadmin.common.vew.AddNewsView>
 </LinearLayout>

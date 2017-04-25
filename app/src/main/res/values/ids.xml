@@ -1,0 +1,6 @@
+<resources>
+    <item type="id" name="float_editext" />
+    <item type="id" name="float_photo" />
+    <item type="id" name="update" />
+    <item type="id" name="linearlayout"></item>
+</resources>

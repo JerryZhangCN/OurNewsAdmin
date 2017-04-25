@@ -1,28 +1,44 @@
 package com.example.peter.newsadmin.common.vew;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.peter.newsadmin.R;
 import com.example.peter.newsadmin.utils.StringUtil;
 import com.example.peter.newsadmin.utils.UiUtil;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class AddNewsView extends LinearLayout {
+/**
+ * jerry 2017-04-25
+ */
+
+public class AddNewsView extends RelativeLayout {
 
     private final String DIFFERENCE_STRING = "AozakiShiki";
 
@@ -31,9 +47,18 @@ public class AddNewsView extends LinearLayout {
     private String content;
 
     private List<String> contents;
-
+    //悬浮按钮点击事件
     private OnActionListener onActionListener;
-    private FloatingActionButton floatingActionButton;
+    //添加图片的button
+    private ImageView floatPhoto;
+    //添加文字的button
+    private ImageView floatEditext;
+    //scroll下的第一个层级
+    private LinearLayout linearLayout;
+    //文字和图片框放在scroll中
+    private ScrollView scrollView;
+    private int i = 0;
+    private List<Integer> id;
 
     public interface OnActionListener {
         void onPhotoLoadEnd(View view, String photoName);
@@ -56,8 +81,7 @@ public class AddNewsView extends LinearLayout {
 
     private void init(Context context) {
         this.context = context;
-        setOrientation(VERTICAL);
-
+        initView(context);
         contents = new ArrayList<>();
     }
 
@@ -65,89 +89,88 @@ public class AddNewsView extends LinearLayout {
         this.onActionListener = onActionListener;
     }
 
-    public void setContent(String content) throws JSONException {
-        if (this.content == null) {
-            this.content = content;
-            startLoadContent();
-        }
+    /**
+     * 初始化view
+     *
+     * @param context
+     */
+    private void initView(Context context) {
+        id = new ArrayList<>();
+        scrollView = new ScrollView(context);
+        linearLayout = new LinearLayout(context);
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMarginStart(24);
+        layoutParams.setMarginEnd(24);
+        scrollView.setLayoutParams(layoutParams);
+        linearLayout.setLayoutParams(layoutParams);
+        linearLayout.setId(R.id.linearlayout);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(linearLayout);
+        this.addView(scrollView);
+        initFloatP(context);
+        initFloatE(context);
     }
 
-    private void startLoadContent() throws JSONException {
-        String[] tempStrings = content.split("<br/>");
-        for (String str : tempStrings) {
-            List<String> list = getPhotoString(str);
-            if (list != null) {
-                contents.addAll(list);
-            } else {
-                contents.add(str);
-            }
-        }
 
-        for (int i = 0; i < contents.size(); i++) {
-            if (contents.get(i).startsWith(DIFFERENCE_STRING)) {
-                final ImageView simpleDraweeView = new ImageView(context);
-                JSONObject jsonObject = new JSONObject(contents.get(i).substring(DIFFERENCE_STRING.length(), contents.get(i).length()));
-                int imgWidth = jsonObject.getInt("width");
-                int imgHeight = jsonObject.optInt("height");
-                final String name = jsonObject.optString("name");
-                if (!(imgWidth == 0 || imgHeight == 0 || TextUtils.isEmpty(name))) {
-                    int height = (UiUtil.getScreenWidth() - UiUtil.dip2px(24)) * imgHeight / imgWidth;
-                    LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                        layoutParams.setMarginStart(UiUtil.dip2px(12));
-                        layoutParams.setMarginEnd(UiUtil.dip2px(12));
-                    }
-                    if (i == 0) {
-                        layoutParams.setMargins(UiUtil.dip2px(12), 0, UiUtil.dip2px(12), UiUtil.dip2px(16));
-                    } else {
-                        layoutParams.setMargins(UiUtil.dip2px(12), UiUtil.dip2px(16), UiUtil.dip2px(12), UiUtil.dip2px(16));
-                    }
-                    simpleDraweeView.setLayoutParams(layoutParams);
 
-                    this.addView(simpleDraweeView);
-
-                    Glide.with(context).load(StringUtil.getPhotoUrl(name))
-                            .asBitmap().diskCacheStrategy(DiskCacheStrategy.ALL)
-//                            .setOnDownloadListener(new OnDownloadListener() {
-//                                @Override
-//                                public void onDownloadEnd(boolean success) {
-//                                    if (success) {
-//                                        simpleDraweeView.setOnClickListener(new OnClickListener() {
-//                                            @Override
-//                                            public void onClick(View v) {
-//                                                onActionListener.onPhotoLoadEnd(simpleDraweeView, name);
-//                                            }
-//                                        });
-//                                    }
-//                                }
-//                            })
-                            .into(simpleDraweeView);
-                }
-            } else {
-                TextView textView = new TextView(context);
-//                textView.setTextColor(ThemeUtil.getColor(context.getTheme(), R.attr.textColor2));
-                textView.setTextSize(18);
-                textView.setLineSpacing(0, 1.2f);
-                textView.setTextIsSelectable(true);
-                LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    layoutParams.setMarginStart(UiUtil.dip2px(12));
-                    layoutParams.setMarginEnd(UiUtil.dip2px(12));
-                }
-                if (i == 0) {
-                    layoutParams.setMargins(UiUtil.dip2px(12), 0, UiUtil.dip2px(12), UiUtil.dip2px(16));
-                } else {
-                    layoutParams.setMargins(UiUtil.dip2px(12), UiUtil.dip2px(16), UiUtil.dip2px(12), UiUtil.dip2px(16));
-                }
-                textView.setLayoutParams(layoutParams);
-
-                String text = "\t\t\t\t" + contents.get(i);
-
-                textView.setText(text);
-                this.addView(textView);
-            }
-        }
+    /**
+     * 初始化添加图片button
+     */
+    private void initFloatP(Context context) {
+        floatPhoto = new ImageView(context);
+        LayoutParams layoutParamsFloat = new LayoutParams(240, 240);
+        layoutParamsFloat.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParamsFloat.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        floatPhoto.setLayoutParams(layoutParamsFloat);
+        floatPhoto.setImageResource(R.drawable.tab_floatphoto);
+        floatPhoto.setClickable(true);
+        floatPhoto.setId(R.id.float_photo);
+        this.addView(floatPhoto);
     }
+
+    /**
+     * 初始化添加文字button
+     */
+    private void initFloatE(Context context) {
+        floatEditext = new ImageView(context);
+        LayoutParams layoutParamsFloat = new LayoutParams(240, 240);
+        layoutParamsFloat.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParamsFloat.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        floatEditext.setLayoutParams(layoutParamsFloat);
+        floatEditext.setImageResource(R.drawable.tab_floatphoto);
+        floatEditext.setClickable(true);
+        floatEditext.setId(R.id.float_editext);
+        this.addView(floatEditext);
+    }
+
+    /**
+     * 点击editext新增输入框
+     *
+     * @throws JSONException
+     */
+    private void addEditText(Context context) {
+        if (id.size() > 0 && id.get(id.size() - 1) == R.id.float_editext + i - 1)
+            return;
+        EditText editText = new EditText(context);
+        LayoutParams layoutParams = new LayoutParams(-1, -2);
+        editText.setLayoutParams(layoutParams);
+        editText.setHint("请输入正文");
+        Log.e("新增editText", "");
+        editText.setId(R.id.float_editext + i);
+        id.add(R.id.float_editext + i);
+        linearLayout.addView(editText);
+        i++;
+    }
+    private void addImageView(final Context context){
+        ImageView imageView=new ImageView(context);
+        LayoutParams layoutParams = new LayoutParams(-1,600);
+        imageView.setLayoutParams(layoutParams);
+        imageView.setImageResource(R.drawable.ic_addpic_gray_24dp);
+        linearLayout.addView(imageView);
+        imageView.setClickable(true);
+        id.add(R.id.float_photo + i);
+    }
+
 
     private List<String> getPhotoString(String str) {
         List<String> list = null;
@@ -170,4 +193,7 @@ public class AddNewsView extends LinearLayout {
         }
         return list;
     }
+
+
+
 }
