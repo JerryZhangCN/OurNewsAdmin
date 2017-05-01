@@ -5,24 +5,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.peter.newsadmin.MainActivity;
 import com.example.peter.newsadmin.R;
 import com.example.peter.newsadmin.base.BaseFragment;
+import com.example.peter.newsadmin.common.StatusCode;
+import com.example.peter.newsadmin.present.presentImpl.AddNewsFragmentPresenter;
+import com.example.peter.newsadmin.present.presentView.AddNewsFragmentView;
 import com.example.peter.newsadmin.utils.GlideImageLoader;
+import com.example.peter.newsadmin.utils.StringUtil;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -32,34 +35,38 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
+import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class AddFragment extends BaseFragment implements View.OnLayoutChangeListener,View.OnClickListener{
-    @BindView(R.id.float_photo)
-    ImageView float_photo;
-    @BindView(R.id.float_editext)
-    ImageView float_editext;
-    @BindView(R.id.linearlayout)LinearLayout linearLayout;
-    @BindView(R.id.main_content)LinearLayout mainView;
+public class AddFragment extends BaseFragment implements AddNewsFragmentView {
+    @BindView(R.id.add_photo)
+    TextView float_photo;
+    @BindView(R.id.add_text)
+    TextView float_editext;
+    @BindView(R.id.linearlayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.type_spinner)
+    Spinner newsType;
+    @BindString(R.string.text)
+    String text;
+    @BindString(R.string.pic)
+    String pic;
 
-    //Activity最外层的Layout视图
-    private View activityRootView;
-    //屏幕高度
-    private int screenHeight = 0;
-    //软件盘弹起后所占高度阀值
-    private int keyHeight = 0;
+
     private ImagePicker imagePicker;
-    private List<Integer> ids;
-    private List<Integer> id;
-    private int defoualtId=0;
-    private int i=1;
-    private Map<Integer,ImageView> map;
+    private boolean isText;
+    private Map<Integer, View> map;
+    private Map<ImageView, String> pathMap;
+    private int flag = 0;
+    private String type;
+    private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技"};
+    private AddNewsFragmentPresenter presenter = new AddNewsFragmentPresenter(this);
 
     public AddFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -70,24 +77,17 @@ public class AddFragment extends BaseFragment implements View.OnLayoutChangeList
         imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());
         initCommonLogic(view);
-        activityRootView = view.findViewById(R.id.main_content);
-        //获取屏幕高度
-        screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
-        //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight/3;
         return view;
     }
 
     @Override
     protected void initCommonLogic(View view) {
         super.initCommonLogic(view);
-        ids=new ArrayList<>();
-        id=new ArrayList<>();
-        map=new LinkedHashMap<>();
+        map = new LinkedHashMap<>();
+        pathMap = new LinkedHashMap<>();
         imgpickerSetting();
-//        getPic(linearLayout);
-        float_photo.setOnClickListener(this);
-        float_editext.setOnClickListener(this);
+        initSpinner();
+
     }
 
     @Override
@@ -109,59 +109,21 @@ public class AddFragment extends BaseFragment implements View.OnLayoutChangeList
     public void onResume() {
         super.onResume();
         //添加layout大小发生改变监听器
-        activityRootView.addOnLayoutChangeListener(this);
+
     }
 
     @Override
     public void showError(int type, String errorMsg) {
 
     }
-////遍历控件是否是imageview
-//    private void getPic(ViewGroup viewGroup) {
-//        if (viewGroup == null) {
-//            return;
-//        }
-//        int count = viewGroup.getChildCount();
-//        for (int i = 0; i < count; i++) {
-//            View view = viewGroup.getChildAt(i);
-//            if (view instanceof ImageView) {
-//               ImageView newDtv = (ImageView) view;
-//                newDtv.setId(R.id.float_photo+defoualtId);
-//                newDtv.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                        startActivityForResult(new Intent(getActivity(), ImageGridActivity.class), v.getId());
-//                    }
-//                });
-//            } else if (view instanceof ViewGroup) {
-//                // 若是布局控件（LinearLayout或RelativeLayout）,继续查询子View
-//                this.getPic((ViewGroup) view);
-//            }
-//        }
-//    }
-
-    //键盘弹出隐藏两个图标
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
-        if(oldBottom != 0 && bottom != 0 &&(oldBottom - bottom > keyHeight)){
-
-            float_editext.setVisibility(View.GONE);
-            float_photo.setVisibility(View.GONE);
-        }else if(oldBottom != 0 && bottom != 0 &&(bottom - oldBottom > keyHeight)){
-            float_editext.setVisibility(View.VISIBLE);
-            float_photo.setVisibility(View.VISIBLE);
-
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null ) {
+        if (data != null) {
             ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-            glideResult(images,requestCode);}
+            glideResult(images, requestCode);
+        }
     }
 
     private void imgpickerSetting() {
@@ -176,28 +138,55 @@ public class AddFragment extends BaseFragment implements View.OnLayoutChangeList
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);
         imagePicker.setMultiMode(false);
     }
+
     //处理imgpicker返回数据
-    private void glideResult(ArrayList<ImageItem> images,int requestcode) {
+    private void glideResult(ArrayList<ImageItem> images, int requestcode) {
         ImageView imageView;
         imageView = new ImageView(getActivity());
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 280);
         imageView.setLayoutParams(params);
+        pathMap.put((ImageView) map.get(requestcode), images.get(0).path);
         imageView.setBackgroundColor(Color.parseColor("#88888888"));
-        imagePicker.getImageLoader().displayImage(getActivity(), images.get(0).path, map.get(requestcode), 280, 280);
+        imagePicker.getImageLoader().displayImage(getActivity(), images.get(0).path, (ImageView) map.get(requestcode), 280, 280);
     }
 
-    @Override
+    @OnClick({R.id.add_text, R.id.add_photo, R.id.put_news})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.float_photo: {
+            case R.id.add_photo: {
                 addImageView(getActivity());
                 break;
             }
-            case R.id.float_editext: {
+            case R.id.add_text: {
                 addEditText(getActivity());
                 break;
             }
+            case R.id.put_news: {
+                showInfo(StatusCode.SHOW_INFO_TOAST, "提交按钮");
+                domain();
+                break;
+            }
         }
+    }
+
+    private void domain() {
+        if (flag == 0) {
+            showInfo("请输入内容");
+            return;
+        }
+        for (int i = 0; i < map.size(); i++) {
+            View view = map.get(i);
+            if (view instanceof TextView) {
+            } else {
+                ImageView imageView = (ImageView) map.get(i);
+                if (StringUtil.isEmpty(pathMap.get(imageView))) {
+                    showInfo("您有尚未选择图片的图片框");
+                    return;
+                }
+                presenter.updataPic(pathMap.get(imageView), i);
+            }
+        }
+
     }
 
 
@@ -207,36 +196,68 @@ public class AddFragment extends BaseFragment implements View.OnLayoutChangeList
      * @throws JSONException
      */
     private void addEditText(Context context) {
-        if (id.size() > 0 && id.get(id.size() - 1) == R.id.float_editext + i - 1)
+        if (isText)
             return;
         EditText editText = new EditText(context);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-1, -2);
         editText.setLayoutParams(layoutParams);
         editText.setHint("请输入正文");
+        editText.setBackgroundResource(R.drawable.public_add_editext_shape);
         Log.e("新增editText", "");
-        editText.setId(R.id.float_editext + i);
-        id.add(R.id.float_editext + i);
+
         linearLayout.addView(editText);
-        i++;
+        editText.requestFocus();
+        map.put(flag, editText);
+        flag++;
+        isText = true;
     }
-    private void addImageView(final Context context){
-        ImageView imageView=new ImageView(context);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,600);
+
+    private void addImageView(final Context context) {
+        ImageView imageView = new ImageView(context);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600);
+        layoutParams.setMargins(0, 24, 0, 24);
         imageView.setLayoutParams(layoutParams);
         imageView.setImageResource(R.drawable.ic_addpic_gray_24dp);
-        imageView.setId(R.id.float_photo + i);
-        map.put(i,imageView);
+        imageView.setId(R.id.float_photo + flag);
+        map.put(flag, imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(), ImageGridActivity.class), v.getId()-R.id.float_photo);
-                Log.e("点击的控件id",v.getId()+"传递的qequest为："+(v.getId()-R.id.float_photo)+"");
+                startActivityForResult(new Intent(getActivity(), ImageGridActivity.class), v.getId() - R.id.float_photo);
+                Log.e("点击的控件id", v.getId() + "传递的qequest为：" + (v.getId() - R.id.float_photo) + "");
             }
         });
         imageView.setClickable(true);
-        ids.add(R.id.float_photo + i);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
         linearLayout.addView(imageView);
-        i++;
+        imageView.requestFocus();
+        flag++;
+        isText = false;
+    }
+
+
+    private void initSpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, curs);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        newsType.setAdapter(adapter);
+        newsType.setSelection(0);
+        newsType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    curyid = position;
+                //showPrice(position);
+                TextView tv = (TextView) view;
+                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                tv.setTextSize(12.0f);    //设置大小
+                tv.setGravity(android.view.Gravity.CENTER_HORIZONTAL);//设置居中
+                showInfo(StatusCode.SHOW_INFO_TOAST, tv.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
 
 }

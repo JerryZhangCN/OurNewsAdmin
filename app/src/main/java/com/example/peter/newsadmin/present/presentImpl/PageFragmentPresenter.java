@@ -9,8 +9,8 @@ import com.example.peter.newsadmin.common.http.CommonResponse;
 import com.example.peter.newsadmin.common.http.GsonResponseParser;
 import com.example.peter.newsadmin.common.http.HttpConnectUtil;
 import com.example.peter.newsadmin.model.HomeNewsModel;
+import com.example.peter.newsadmin.model.NewList;
 import com.example.peter.newsadmin.model.NewsModel;
-import com.example.peter.newsadmin.model.RequestModel;
 import com.example.peter.newsadmin.model.TypeNewsMode;
 import com.example.peter.newsadmin.present.presentView.PageFragmentView;
 import com.example.peter.newsadmin.utils.StringUtil;
@@ -43,9 +43,12 @@ public class PageFragmentPresenter extends BasePresenter {
             }
             default: {
                 Gson gson = new Gson();
-                RequestModel requestModel = new RequestModel();
+                NewList requestModel = new NewList();
                 requestModel.setType(id);
-                HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_HOME_NEWS, new HttpCallback());
+                requestModel.setPage(1);
+                requestModel.setSize(10);
+                requestModel.setSort(1);
+                HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_TYPE_NEWS, new HttpCallback());
                 break;
             }
         }
@@ -107,6 +110,22 @@ public class PageFragmentPresenter extends BasePresenter {
                         }
                     }
                     break;
+                }
+                case APIType.REQUEST_TYPE_NEWS: {
+
+                    GsonResponseParser<HomeNewsModel> parser = new GsonResponseParser<HomeNewsModel>() {
+                    };
+                    CommonResponse response = parser.parse(responseT);
+                    Log.e(ContansString.LOG_MSG, "获取分类数据" + responseT);
+                    if (isSuccess(response.getResult())) {
+                        TypeNewsMode[] list = ((HomeNewsModel) response.getData()).getNews();
+                        List<TypeNewsMode> list1 = new ArrayList<>();
+                        for (int i = 0; i < list.length; i++)
+                            list1.add(list[i]);
+                        handMsg(list1);
+                    } else {
+
+                    }
                 }
                 default:
                     break;

@@ -19,5 +19,7 @@ public class APIURL {
     public static final String GET_PIC=BASE_URL+"downloadImage";
     //获取新闻详情
     public static final String GET_NEWS_CONTENT=BASE_URL+"getNewContent";
+    //上传图片
+    public static final String PULL_PIC=BASE_URL+"uploadImage";
 
 }

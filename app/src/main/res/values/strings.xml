@@ -46,4 +46,8 @@
     <string name="add_news">推送新闻</string>
     <string name="title">标题</string>
     <string name="news_type">新闻类别</string>
+    <string name="add_text">添加段落</string>
+    <string name="add_photo">添加图片</string>
+    <string name="text">text</string>
+    <string name="pic">pic</string>
 </resources>

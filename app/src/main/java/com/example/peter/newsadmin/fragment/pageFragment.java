@@ -85,8 +85,6 @@ public class pageFragment extends BaseFragment implements PageFragmentView,Swipe
         presenter.getNews(getArguments().getInt(ARG_PAGE));
 
     }
-
-
     private Handler mHandler = new Handler()
     {
         public void handleMessage(android.os.Message msg)
