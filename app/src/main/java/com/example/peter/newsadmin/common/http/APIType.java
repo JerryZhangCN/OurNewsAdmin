@@ -18,5 +18,6 @@ public class APIType {
     public static final int REQUEST_GET_NEWS_CONTENT= 5;  //
     //6.    上传图片
     public static final int REQUEST_PULL_IMAGE=6;
-
+    //7.    获取验证码
+    public static final int REQUEST_GET_CODE=7;
 }

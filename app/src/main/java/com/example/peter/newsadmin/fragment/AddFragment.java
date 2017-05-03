@@ -35,6 +35,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindString;
@@ -60,10 +61,14 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
     private boolean isText;
     private Map<Integer, View> map;
     private Map<ImageView, String> pathMap;
+    private int imageViewNimber = 0;
     private int flag = 0;
     private String type;
     private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技"};
     private AddNewsFragmentPresenter presenter = new AddNewsFragmentPresenter(this);
+
+    private List<String> pathList;
+    private List<Integer>numberList;
 
     public AddFragment() {
 
@@ -87,7 +92,6 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
         pathMap = new LinkedHashMap<>();
         imgpickerSetting();
         initSpinner();
-
     }
 
     @Override
@@ -213,6 +217,10 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
     }
 
     private void addImageView(final Context context) {
+        if (pathMap.size() < imageViewNimber) {
+            showInfo("您有图片框未选择图片");
+            return;
+        }
         ImageView imageView = new ImageView(context);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 600);
         layoutParams.setMargins(0, 24, 0, 24);
@@ -233,6 +241,7 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
         imageView.requestFocus();
         flag++;
         isText = false;
+        imageViewNimber++;
     }
 
 

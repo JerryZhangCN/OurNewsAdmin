@@ -1,23 +1,32 @@
 package com.example.peter.newsadmin.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.peter.newsadmin.R;
 import com.example.peter.newsadmin.base.BaseActivity;
+import com.example.peter.newsadmin.present.presentImpl.RegisterPresenter;
+import com.example.peter.newsadmin.present.presentView.RegisterView;
+import com.example.peter.newsadmin.utils.StringUtil;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements RegisterView {
     @BindView(R.id.btn_register_get_code)
     Button get_code;
     @BindView(R.id.btn_register_register)
     Button register;
+    @BindView(R.id.register_number)
+    EditText phone;
+//    @BindView(R.id.register_password)
+//    EditText password;
+    @BindView(R.id.code_edit)
+    EditText code;
     @BindString(R.string.register_cover_get_code)
     String recapture;
     @BindString(R.string.register_get_verification_code)
@@ -28,6 +37,7 @@ public class RegisterActivity extends BaseActivity {
     private boolean result = true;
     private int time = 60;
     private int count = 0;
+    private RegisterPresenter presenter = new RegisterPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +51,15 @@ public class RegisterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_back_user: {
                 finish();
+                break;
             }
             case R.id.btn_register_get_code: {
-                showLoadingDialog();
+//                showLoadingDialog();
+                if (StringUtil.isEmpty(phone.getText().toString().trim())) {
+                    showInfo("请输入手机号");
+                    return;
+                }
+                presenter.getCode(phone.getText().toString().trim());
                 Toast.makeText(this, sms_send, Toast.LENGTH_SHORT).show();
                 showTime();
                 break;

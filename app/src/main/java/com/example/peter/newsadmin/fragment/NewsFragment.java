@@ -57,12 +57,12 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     public void renderFragment() {
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        viewPager.setOffscreenPageLimit(7);
-        pagerAdapter.notifyDataSetChanged();
-        Log.e("主fragment执行重载","");
+//        viewPager.setAdapter(pagerAdapter);
+//        tabLayout.setupWithViewPager(viewPager);
+//        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+//        viewPager.setOffscreenPageLimit(7);
+//        pagerAdapter.notifyDataSetChanged();
+//        Log.e("主fragment执行重载","");
     }
 
     @Override

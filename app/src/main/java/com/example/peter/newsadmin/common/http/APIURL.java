@@ -8,9 +8,9 @@ public class APIURL {
     //服务器地址
     public static final String BASE_URL="http://112.74.52.72:8080/OurNews/";
     //登陆
-    public static final String LOGIN=BASE_URL+"login";
+    public static final String LOGIN=BASE_URL+"loginManager";
     //注册
-    public static final String REGISTER=BASE_URL+"register";
+    public static final String REGISTER=BASE_URL+"registerManager";
     //首页新闻地址
     public static final String GET_HOME_NEWS=BASE_URL+"getHomeNews";
     //对应类别新闻
@@ -21,5 +21,7 @@ public class APIURL {
     public static final String GET_NEWS_CONTENT=BASE_URL+"getNewContent";
     //上传图片
     public static final String PULL_PIC=BASE_URL+"uploadImage";
+    //获取验证码
+    public static final String GET_CODE=BASE_URL+"getCode";
 
 }

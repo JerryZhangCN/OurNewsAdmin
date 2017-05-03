@@ -35,7 +35,7 @@ public class AddNewsFragmentPresenter extends BasePresenter {
 
     public void updataPic(String path, int id) {
         File file=new File(path);
-        OkHttpUtils.post().addFile("image/*", file.getName(), file).url(APIURL.PULL_PIC).id(APIType.REQUEST_PULL_IMAGE).build().execute(new HttpCallback());
+        OkHttpUtils.post().addFile("upload", file.getName(), file).url(APIURL.PULL_PIC).id(APIType.REQUEST_PULL_IMAGE).build().execute(new HttpCallback());
 
 
     }
@@ -81,7 +81,7 @@ public class AddNewsFragmentPresenter extends BasePresenter {
 
                 case APIType.REQUEST_PULL_IMAGE: {
                     {
-                        GsonResponseParser<NewsModel> parser = new GsonResponseParser<NewsModel>() {
+                        GsonResponseParser<String[]> parser = new GsonResponseParser<String[]>() {
                         };
                         CommonResponse response = parser.parse(responseT);
                         Log.e(ContansString.LOG_MSG, "上传图片数据" + responseT);
@@ -96,6 +96,17 @@ public class AddNewsFragmentPresenter extends BasePresenter {
                 default:
                     break;
             }
+        }
+    }
+    class Pic{
+        private String[] data;
+
+        public String[] getData() {
+            return data;
+        }
+
+        public void setData(String[] data) {
+            this.data = data;
         }
     }
 
