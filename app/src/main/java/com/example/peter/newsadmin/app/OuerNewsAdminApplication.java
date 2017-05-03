@@ -3,6 +3,8 @@ package com.example.peter.newsadmin.app;
 
 import android.app.Application;
 
+import com.lzy.okhttputils.OkHttpUtils;
+
 /**
  * created by byron on 2016/12/18
  *
@@ -19,6 +21,7 @@ public class OuerNewsAdminApplication extends Application {
 
     private void initApplicationLogic() {
         AppContext.init(this);
+        OkHttpUtils.init(this);
     }
 
 }

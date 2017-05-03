@@ -73,6 +73,7 @@
                         android:background="@null"
                         android:hint="@string/register_phone"
                         android:paddingLeft="@dimen/login_hint"
+                        android:inputType="number"
                         android:textColorHint="@color/gray"
                         android:textSize="@dimen/textSize28px" />
                 </LinearLayout>
@@ -138,6 +139,7 @@
                 android:background="@drawable/register_code_shape"
                 android:gravity="center"
                 android:hint="@string/register_verification_hitn"
+                android:inputType="number"
                 android:maxLength="6"
                 android:textColor="@color/blue"
                 android:textColorHint="@color/gray"

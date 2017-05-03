@@ -23,5 +23,6 @@ public class APIURL {
     public static final String PULL_PIC=BASE_URL+"uploadImage";
     //获取验证码
     public static final String GET_CODE=BASE_URL+"getCode";
-
+    //上传新闻
+    public static final String PUT_NEWS=BASE_URL+"addNews";
 }

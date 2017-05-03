@@ -66,6 +66,20 @@ public class RegisterPresenter extends BasePresenter {
         Log.e("注册发送参数",map.toString());
         HttpConnectUtil.requestParams(map,APIType.REQUEST_REGISTER,new HttpCallback());
     }
+    public void login(String phone,String code){
+        if(!phone.equals(this.getPhone())||!code.equals(this.getCode())){
+            view.showInfo("验证码错误");
+            return;
+        }
+        String date = DateUtil.getTimeStamp();
+        Map<String,String> map=new HashMap<>();
+        map.put("phone",phone);
+        map.put("time",date);
+        map.put("code",code);
+        map.put("key",MD5Tool.getMD5(ContansString.APP_KEY + code + date));
+        Log.e("登陆发送参数",map.toString());
+        HttpConnectUtil.requestParams(map,APIType.REQUEST_LOGIN,new HttpCallback());
+    }
 
     private void handRegister(User user){
         User.getInstance().setId(user.getId());
@@ -76,6 +90,7 @@ public class RegisterPresenter extends BasePresenter {
         User.getInstance().setSex(user.getSex());
         User.getInstance().setSign(user.getSign());
         User.getInstance().setToken(user.getToken());
+        view.toHomeActivity();
     }
 
     private class HttpCallback extends StringCallback {
@@ -119,6 +134,7 @@ public class RegisterPresenter extends BasePresenter {
                 }
                 break;
                 }
+                case APIType.REQUEST_LOGIN:
                 case APIType.REQUEST_REGISTER:{
                     GsonResponseParser<User> parser = new GsonResponseParser<User>() {
                     };

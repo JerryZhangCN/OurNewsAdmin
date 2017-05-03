@@ -7,5 +7,6 @@ import com.example.peter.newsadmin.base.BaseView;
  */
 
 public interface RegisterView extends BaseView {
+    void toHomeActivity();
 
 }

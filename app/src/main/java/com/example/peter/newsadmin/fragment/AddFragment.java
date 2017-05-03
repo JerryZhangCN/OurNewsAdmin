@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.example.peter.newsadmin.R;
 import com.example.peter.newsadmin.base.BaseFragment;
-import com.example.peter.newsadmin.common.StatusCode;
+import com.example.peter.newsadmin.model.User;
 import com.example.peter.newsadmin.present.presentImpl.AddNewsFragmentPresenter;
 import com.example.peter.newsadmin.present.presentView.AddNewsFragmentView;
 import com.example.peter.newsadmin.utils.GlideImageLoader;
@@ -55,6 +55,8 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
     String text;
     @BindString(R.string.pic)
     String pic;
+    @BindView(R.id.add_title)
+    EditText title;
 
 
     private ImagePicker imagePicker;
@@ -63,12 +65,13 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
     private Map<ImageView, String> pathMap;
     private int imageViewNimber = 0;
     private int flag = 0;
-    private String type;
-    private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技"};
+    private int type;
+    private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技", "今日头条"};
     private AddNewsFragmentPresenter presenter = new AddNewsFragmentPresenter(this);
 
-    private List<String> pathList;
-    private List<Integer>numberList;
+
+    private List<Integer> numberList;
+    private Map<Integer, String> textMap;
 
     public AddFragment() {
 
@@ -90,6 +93,8 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
         super.initCommonLogic(view);
         map = new LinkedHashMap<>();
         pathMap = new LinkedHashMap<>();
+        textMap = new LinkedHashMap<>();
+        numberList = new ArrayList<>();
         imgpickerSetting();
         initSpinner();
     }
@@ -166,7 +171,10 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
                 break;
             }
             case R.id.put_news: {
-                showInfo(StatusCode.SHOW_INFO_TOAST, "提交按钮");
+                if (StringUtil.isEmpty(User.getInstance().getId())) {
+                    showInfo("请先登陆或注册");
+                    return;
+                }
                 domain();
                 break;
             }
@@ -178,21 +186,39 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
             showInfo("请输入内容");
             return;
         }
+        if (StringUtil.isEmpty(title.getText().toString())) {
+            showInfo("请输入标题");
+            return;
+        }
         for (int i = 0; i < map.size(); i++) {
             View view = map.get(i);
             if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textMap.put(i, textView.getText().toString());
             } else {
                 ImageView imageView = (ImageView) map.get(i);
                 if (StringUtil.isEmpty(pathMap.get(imageView))) {
                     showInfo("您有尚未选择图片的图片框");
                     return;
                 }
-                presenter.updataPic(pathMap.get(imageView), i);
+                textMap.put(i, pathMap.get(imageView));
+                numberList.add(i);
             }
         }
+        presenter.updataPic(textMap, numberList, getType(), title.getText().toString());
 
     }
 
+    @Override
+    public void cleanData() {
+        map.clear();
+        pathMap.clear();
+        imageViewNimber = 0;
+        flag = 0;
+        linearLayout.removeAllViews();
+        numberList.clear();
+        textMap.clear();
+    }
 
     /**
      * 点击editext新增输入框
@@ -259,7 +285,8 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
                 tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
                 tv.setTextSize(12.0f);    //设置大小
                 tv.setGravity(android.view.Gravity.CENTER_HORIZONTAL);//设置居中
-                showInfo(StatusCode.SHOW_INFO_TOAST, tv.getText().toString());
+//                showInfo(StatusCode.SHOW_INFO_TOAST, position+"");
+                setType(position + 1);
             }
 
             @Override
@@ -269,4 +296,11 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
 
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }

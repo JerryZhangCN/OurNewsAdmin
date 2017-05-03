@@ -1,5 +1,6 @@
 package com.example.peter.newsadmin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     Button register;
     @BindView(R.id.register_number)
     EditText phone;
-//    @BindView(R.id.register_password)
+    //    @BindView(R.id.register_password)
 //    EditText password;
     @BindView(R.id.code_edit)
     EditText code;
@@ -46,7 +47,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         initLogic();
     }
 
-    @OnClick({R.id.btn_back_user, R.id.btn_register_get_code})
+    @OnClick({R.id.btn_back_user, R.id.btn_register_get_code,R.id.btn_register_register})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.btn_back_user: {
@@ -59,9 +60,29 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
                     showInfo("请输入手机号");
                     return;
                 }
+                if (phone.getText().toString().trim().length() != 11) {
+                    showInfo("请输入正确的手机号");
+                    return;
+                }
                 presenter.getCode(phone.getText().toString().trim());
                 Toast.makeText(this, sms_send, Toast.LENGTH_SHORT).show();
                 showTime();
+                break;
+            }
+            case R.id.btn_register_register: {
+                if (StringUtil.isEmpty(phone.getText().toString().trim())) {
+                    showInfo("请输入手机号");
+                    return;
+                }
+                if (phone.getText().toString().trim().length() != 11) {
+                    showInfo("请输入正确的手机号");
+                    return;
+                }
+                if (StringUtil.isEmpty(code.getText().toString().trim())) {
+                    showInfo("请输入验证码");
+                    return;
+                }
+                presenter.register(phone.getText().toString().trim(), code.getText().toString().trim());
                 break;
             }
         }
@@ -111,4 +132,10 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     }
 
 
+    @Override
+    public void toHomeActivity() {
+        Intent intent=new Intent(RegisterActivity.this,HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

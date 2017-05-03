@@ -20,4 +20,6 @@ public class APIType {
     public static final int REQUEST_PULL_IMAGE=6;
     //7.    获取验证码
     public static final int REQUEST_GET_CODE=7;
+    //8.    上传新闻
+    public static final int REQUEST_PUT_NEWS=8;
 }

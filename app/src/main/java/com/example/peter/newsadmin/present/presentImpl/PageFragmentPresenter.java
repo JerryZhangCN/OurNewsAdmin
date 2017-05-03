@@ -9,12 +9,10 @@ import com.example.peter.newsadmin.common.http.CommonResponse;
 import com.example.peter.newsadmin.common.http.GsonResponseParser;
 import com.example.peter.newsadmin.common.http.HttpConnectUtil;
 import com.example.peter.newsadmin.model.HomeNewsModel;
-import com.example.peter.newsadmin.model.NewList;
 import com.example.peter.newsadmin.model.NewsModel;
 import com.example.peter.newsadmin.model.TypeNewsMode;
 import com.example.peter.newsadmin.present.presentView.PageFragmentView;
 import com.example.peter.newsadmin.utils.StringUtil;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -42,14 +40,16 @@ public class PageFragmentPresenter extends BasePresenter {
                 break;
             }
             default: {
-                Gson gson = new Gson();
-                NewList requestModel = new NewList();
-                requestModel.setType(id);
-                requestModel.setPage(1);
-                requestModel.setSize(10);
-                requestModel.setSort(1);
-                HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_TYPE_NEWS, new HttpCallback());
+                HttpConnectUtil.request("", APIType.REQUEST_HOME_NEWS, new HttpCallback());
                 break;
+//                Gson gson = new Gson();
+//                NewList requestModel = new NewList();
+//                requestModel.setType(id);
+//                requestModel.setPage(1);
+//                requestModel.setSize(10);
+//                requestModel.setSort(1);
+//                HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_TYPE_NEWS, new HttpCallback());
+//                break;
             }
         }
     }

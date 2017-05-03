@@ -48,6 +48,12 @@ public class HttpConnectUtil {
             case APIType.REQUEST_REGISTER:
                 OkHttpUtils.post().url(APIURL.REGISTER).params(params).id(apiType).build().execute(callBack);
                 break;
+            case APIType.REQUEST_LOGIN:
+                OkHttpUtils.post().url(APIURL.LOGIN).params(params).id(apiType).build().execute(callBack);
+                break;
+            case APIType.REQUEST_PUT_NEWS:
+                OkHttpUtils.post().url(APIURL.PUT_NEWS).params(params).id(apiType).build().execute(callBack);
+                break;
         }
     }
 }
