@@ -85,30 +85,31 @@
                     android:layout_marginRight="@dimen/public_hint"
                     android:background="@color/gray"></View>
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/login_card"-->
-                    <!--android:orientation="horizontal">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_card"
+                    android:orientation="horizontal">
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/public_hint"-->
-                        <!--android:layout_height="@dimen/public_hint"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:layout_margin="@dimen/login_hint"-->
-                        <!--app:srcCompat="@drawable/ic_password" />-->
+                    <ImageView
+                        android:layout_width="@dimen/public_hint"
+                        android:layout_height="@dimen/public_hint"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/login_hint"
+                        app:srcCompat="@drawable/ic_password" />
 
-                    <!--<EditText-->
-                        <!--android:id="@+id/register_password"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:background="@null"-->
-                        <!--android:hint="@string/register_password"-->
-                        <!--android:paddingLeft="@dimen/login_hint"-->
-                        <!--android:textColorHint="@color/gray"-->
-                        <!--android:textSize="@dimen/textSize28px" />-->
+                    <EditText
+                        android:id="@+id/register_password"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/register_password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="@dimen/login_hint"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/textSize28px" />
 
-                <!--</LinearLayout>-->
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <LinearLayout

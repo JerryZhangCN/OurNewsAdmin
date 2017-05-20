@@ -52,7 +52,7 @@ public class RegisterPresenter extends BasePresenter {
         this.setPhone(code.getPhone());
         this.setCode(code.getCode());
     }
-    public void register(String phone,String code){
+    public void register(String phone,String code,String password){
         if(!phone.equals(this.getPhone())||!code.equals(this.getCode())){
             view.showInfo("验证码错误");
             return;
@@ -62,6 +62,7 @@ public class RegisterPresenter extends BasePresenter {
         map.put("phone",phone);
         map.put("time",date);
         map.put("code",code);
+        map.put("password",password);
         map.put("key",MD5Tool.getMD5(ContansString.APP_KEY + code + date));
         Log.e("注册发送参数",map.toString());
         HttpConnectUtil.requestParams(map,APIType.REQUEST_REGISTER,new HttpCallback());

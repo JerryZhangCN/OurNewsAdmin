@@ -24,8 +24,8 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     Button register;
     @BindView(R.id.register_number)
     EditText phone;
-    //    @BindView(R.id.register_password)
-//    EditText password;
+    @BindView(R.id.register_password)
+    EditText password;
     @BindView(R.id.code_edit)
     EditText code;
     @BindString(R.string.register_cover_get_code)
@@ -82,7 +82,15 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
                     showInfo("请输入验证码");
                     return;
                 }
-                presenter.register(phone.getText().toString().trim(), code.getText().toString().trim());
+                if (StringUtil.isEmpty(password.getText().toString().trim())) {
+                    showInfo("请输入密码");
+                    return;
+                }
+                if(password.getText().toString().trim().length()<8||password.getText().toString().trim().length()>12){
+                    showInfo("密码长度为8到12位");
+                    return;
+                }
+                presenter.register(phone.getText().toString().trim(), code.getText().toString().trim(),password.getText().toString().trim());
                 break;
             }
         }
