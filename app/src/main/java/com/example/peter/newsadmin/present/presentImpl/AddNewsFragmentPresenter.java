@@ -38,7 +38,7 @@ public class AddNewsFragmentPresenter extends BasePresenter {
         this.view = _view;
     }
 
-    public void updataPic(final Map<Integer, String> map, final List<Integer> list, int type, String title) {
+    public void updataPic(final Map<Integer, String> map, final List<Integer> list, final int type, final String title) {
 
         if (list.size() > 0) {
             List<File> fileList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class AddNewsFragmentPresenter extends BasePresenter {
                     Log.e(ContansString.LOG_MSG, "上传图片数据" + s);
                     if (isSuccess(response1.getResult())) {
                         String[] image = (String[]) response1.getData();
-                        setCover(image[1]);
+                        setCover(image[0]);
                         for (int i = 0; i < list.size(); i++) {
                             Gson gson = new Gson();
                             Pic pic = new Pic();
@@ -70,10 +70,13 @@ public class AddNewsFragmentPresenter extends BasePresenter {
                     } else {
                         view.showInfo("上传图片失败");
                     }
+                    putNews(map, title, type);
+                    return;
                 }
             });
+        } else {
+            putNews(map, title, type);
         }
-        putNews(map, title, type);
     }
 
 
