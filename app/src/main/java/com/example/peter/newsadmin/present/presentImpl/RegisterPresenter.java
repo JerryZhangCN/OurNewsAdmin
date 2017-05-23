@@ -140,6 +140,9 @@ public class RegisterPresenter extends BasePresenter {
                     if (isSuccess(response.getResult())) {
                         handRegister((User) response.getData());
                     }
+                    else {
+                        view.showInfo("账号或密码错误");
+                    }
                 break;
                 }
                 default:

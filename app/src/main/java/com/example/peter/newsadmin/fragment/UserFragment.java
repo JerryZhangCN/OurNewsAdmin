@@ -54,8 +54,8 @@ public class UserFragment extends BaseFragment {
         return view;
     }
 
-    @OnClick({R.id.btn_user_login,R.id.btn_user_register,R.id.pic_frame,R.id.user_brith_layout,R.id.user_sex_layout,R.id.invita_other
-    ,R.id.like_me,R.id.check_in})
+    @OnClick({R.id.btn_user_login,R.id.btn_user_register,R.id.setting,R.id.user_brith_layout,R.id.user_sex_layout,R.id.invita_other
+    ,R.id.like_me,R.id.check_in,R.id.user_pic})
     public void onclick(View v){
         switch (v.getId()){
             case R.id.btn_user_login:{
@@ -75,7 +75,7 @@ public class UserFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 }
-            case R.id.pic_frame :{
+            case R.id.user_pic :{
                 Intent intent=new Intent(getActivity(), UserMessageActivity.class);
                 startActivity(intent);
                 break;
@@ -98,6 +98,16 @@ public class UserFragment extends BaseFragment {
                 showInfo(StatusCode.SHOW_INFO_DIALOG,"请先登录");
                 break;
             }
+            case R.id.setting:{
+                if(StringUtil.isEmpty(User.getInstance().getId())){
+                    showInfo("您尚未登录");
+                    return;
+                }else {
+                    User.getInstance().cleanData();
+                    initView();
+                }
+                break;
+            }
 
         }
     }
@@ -113,6 +123,10 @@ public class UserFragment extends BaseFragment {
             }else user_sex.setText("少侠");
             user_brith.setText(User.getInstance().getBirthday());
 
+        }
+        else {
+            no_login_frame.setVisibility(View.VISIBLE);
+            login_frame.setVisibility(View.GONE);
         }
     }
     @Override

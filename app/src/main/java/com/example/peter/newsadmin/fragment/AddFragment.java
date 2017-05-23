@@ -66,7 +66,7 @@ public class AddFragment extends BaseFragment implements AddNewsFragmentView {
     private int imageViewNimber = 0;
     private int flag = 0;
     private int type;
-    private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技", "今日头条"};
+    private String[] curs = {"ACG", "游戏", "社会", "娱乐", "科技"};
     private AddNewsFragmentPresenter presenter = new AddNewsFragmentPresenter(this);
 
 

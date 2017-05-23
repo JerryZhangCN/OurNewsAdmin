@@ -29,4 +29,8 @@ public class APIURL {
     public static final String UPDATE_USER_INFO= BASE_URL+"changeManagerInfo";
     //获取自己推送的新闻
     public static final String GET_OWN_NEWS=BASE_URL+"getOwnNewList";
+    //修改新闻上线状态
+    public static final String SET_STATE=BASE_URL+"changeNewState";
+    //推送新闻
+    public static final String PUSH_NEWS=BASE_URL+"pushNew";
 }

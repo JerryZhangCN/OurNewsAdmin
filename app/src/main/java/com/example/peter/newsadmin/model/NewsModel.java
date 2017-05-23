@@ -1,7 +1,5 @@
 package com.example.peter.newsadmin.model;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by cdxy_ on 2017/4/8.
  */
@@ -19,6 +17,7 @@ public class NewsModel {
     private int history_num;
     private int collection_num;
     private Manager manager;
+    private int state;
 
     public long getId() {
         return id;
@@ -114,5 +113,13 @@ public class NewsModel {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

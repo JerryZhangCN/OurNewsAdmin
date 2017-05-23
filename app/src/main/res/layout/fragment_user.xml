@@ -34,7 +34,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:padding="1dp"
-                android:text="@string/setting"
+                android:text="退出"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize28px" />
         </RelativeLayout>
@@ -43,7 +43,6 @@
          android:id="@+id/pic_frame"
          android:layout_width="match_parent"
          android:layout_height="@dimen/user_button"
-         android:layout_toEndOf="@+id/linearLayout"
          android:orientation="vertical"
          android:gravity="center"
          android:visibility="gone">

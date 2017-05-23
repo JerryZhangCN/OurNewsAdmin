@@ -70,6 +70,14 @@ public class HttpConnectUtil {
                 OkHttpUtils.post().url(APIURL.GET_OWN_NEWS).params(params).id(apiType).build().execute(callBack);
                 break;
             }
+            case APIType.REQUEST_CHANGE_STATE:{
+                OkHttpUtils.post().url(APIURL.SET_STATE).params(params).id(apiType).build().execute(callBack);
+                break;
+            }
+            case APIType.REQUEST_PUSH_NEW:{
+                OkHttpUtils.post().url(APIURL.PUSH_NEWS).params(params).id(apiType).build().execute(callBack);
+                break;
+            }
         }
     }
 }

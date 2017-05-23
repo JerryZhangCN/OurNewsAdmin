@@ -22,6 +22,16 @@ public class User {
         }
         return mInstance;
     }
+    public void cleanData(){
+        this.id=null;
+        this.phone=null;
+        this.nick_name=null;
+        this.sex=null;
+        this.sign=null;
+        this.birthday=null;
+        this.photo=null;
+        this.token=null;
+    }
 
 
     public String getId() {
