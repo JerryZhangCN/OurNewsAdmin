@@ -47,4 +47,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'me.relex:photodraweeview:1.1.2'
     compile 'com.github.chenBingX:SuperTextView:v1.0'
+    compile 'com.github.florent37:singledateandtimepicker:1.1.3'
 }

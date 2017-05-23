@@ -22,4 +22,8 @@ public class APIType {
     public static final int REQUEST_GET_CODE=7;
     //8.    上传新闻
     public static final int REQUEST_PUT_NEWS=8;
+    //9.    修改信息
+    public static final int REQUEST_UPDATE_INFO=9;
+    //10.   推送新闻列表
+    public static final int REQUEST_GET_OWN_NEWS=10;
 }

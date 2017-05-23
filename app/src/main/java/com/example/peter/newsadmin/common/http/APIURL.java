@@ -25,4 +25,8 @@ public class APIURL {
     public static final String GET_CODE=BASE_URL+"getCode";
     //上传新闻
     public static final String PUT_NEWS=BASE_URL+"addNews";
+    //修改管理员信息
+    public static final String UPDATE_USER_INFO= BASE_URL+"changeManagerInfo";
+    //获取自己推送的新闻
+    public static final String GET_OWN_NEWS=BASE_URL+"getOwnNewList";
 }

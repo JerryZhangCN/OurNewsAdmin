@@ -75,8 +75,9 @@ public class pageFragment extends BaseFragment implements PageFragmentView,Swipe
 
     @Override
     public void updateMsg(List<NewsModel> news) {
-        swipeRefresh.setOnRefreshListener(this);
         this.news = news;
+        if(swipeRefresh.isRefreshing())
+            swipeRefresh.setRefreshing(false);
         HomeAdapter adapter=new HomeAdapter();
         adapter.setOnItemClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,6 +93,7 @@ public class pageFragment extends BaseFragment implements PageFragmentView,Swipe
     protected void initCommonLogic(View view) {
         super.initCommonLogic(view);
         initMap();
+        swipeRefresh.setOnRefreshListener(this);
         presenter.getNews(getArguments().getInt(ARG_PAGE));
 
     }
@@ -102,8 +104,7 @@ public class pageFragment extends BaseFragment implements PageFragmentView,Swipe
             switch (msg.what)
             {
                 case REFRESH_COMPLETE:
-                    showInfo("刷新");
-                    swipeRefresh.setRefreshing(false);
+                    presenter.getNews(getArguments().getInt(ARG_PAGE));
                     break;
 
             }
@@ -120,13 +121,12 @@ public class pageFragment extends BaseFragment implements PageFragmentView,Swipe
     }
     @Override
     public void onRefresh() {
-        mHandler.sendEmptyMessageDelayed(REFRESH_COMPLETE,2000);
+        mHandler.sendEmptyMessageDelayed(REFRESH_COMPLETE,0);
 
     }
 
     @Override
     public void onItemClick(View view, int postion) {
-        showInfo("点击事件响应"+news.get(postion).getTitle());
         Intent intent=new Intent(getActivity(),NewsActivity.class);
         intent.putExtra("nid",String.valueOf(news.get(postion).getId()));
         startActivity(intent);

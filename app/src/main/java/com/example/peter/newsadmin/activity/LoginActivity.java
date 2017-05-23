@@ -18,16 +18,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements RegisterView{
-    @BindView(R.id.btn_register_get_code)
-    Button get_code;
     @BindView(R.id.btn_register_register)
     Button register;
     @BindView(R.id.register_number)
     EditText phone;
-    //    @BindView(R.id.register_password)
-//    EditText password;
-    @BindView(R.id.code_edit)
-    EditText code;
+    @BindView(R.id.register_password)
+    EditText password;
     @BindString(R.string.register_cover_get_code)
     String recapture;
     @BindString(R.string.register_get_verification_code)
@@ -46,26 +42,11 @@ public class LoginActivity extends BaseActivity implements RegisterView{
         initLogic();
     }
 
-    @OnClick({R.id.btn_back_user_login, R.id.btn_register_get_code,R.id.btn_register_register,R.id.go_register})
+    @OnClick({R.id.btn_back_user_login,R.id.btn_register_register,R.id.go_register})
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.btn_back_user_login: {
                 finish();
-                break;
-            }
-            case R.id.btn_register_get_code: {
-//                showLoadingDialog();
-                if (StringUtil.isEmpty(phone.getText().toString().trim())) {
-                    showInfo("请输入手机号");
-                    return;
-                }
-                if (phone.getText().toString().trim().length() != 11) {
-                    showInfo("请输入正确的手机号");
-                    return;
-                }
-                presenter.getCode(phone.getText().toString().trim());
-                Toast.makeText(this, sms_send, Toast.LENGTH_SHORT).show();
-                showTime();
                 break;
             }
             case R.id.btn_register_register: {
@@ -77,11 +58,11 @@ public class LoginActivity extends BaseActivity implements RegisterView{
                     showInfo("请输入正确的手机号");
                     return;
                 }
-                if (StringUtil.isEmpty(code.getText().toString().trim())) {
+                if (StringUtil.isEmpty(password.getText().toString().trim())) {
                     showInfo("请输入验证码");
                     return;
                 }
-                presenter.login(phone.getText().toString().trim(), code.getText().toString().trim());
+                presenter.login(phone.getText().toString().trim(), password.getText().toString().trim());
                 break;
             }
             case R.id.go_register:{
@@ -97,43 +78,7 @@ public class LoginActivity extends BaseActivity implements RegisterView{
         super.initLogic();
     }
 
-    public void showTime() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (result) {
-                    time--;
-                    try {
-                        Thread.sleep(1000);
-                        get_code.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                get_code.setText(time + recapture);
-                                get_code.setClickable(false);
-                                get_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.public_user_button_pressed));
-                            }
-                        });
-                        if (time <= 1) {
-                            count = 0;
-                            result = false;
-                            get_code.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    get_code.setText(get_verification_code);
-                                    get_code.setClickable(true);
-                                    get_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.public_button_shape));
-                                }
-                            });
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                result = true;
-                time = 60;
-            }
-        }).start();
-    }
+
 
 
     @Override

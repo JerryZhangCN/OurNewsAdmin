@@ -1,9 +1,36 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.example.peter.newsadmin.fragment.EditFragment">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"
+        android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="我推送的新闻"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize36px" />
 
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/no_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请登录后进行此操作"
+            android:textSize="@dimen/textSize36px"
+            android:textColor="@color/blue"/>
+    </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_swipe"
         android:layout_width="match_parent"
@@ -32,4 +59,5 @@
                 android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-</FrameLayout>
+
+</LinearLayout>

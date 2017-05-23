@@ -67,17 +67,13 @@ public class RegisterPresenter extends BasePresenter {
         Log.e("注册发送参数",map.toString());
         HttpConnectUtil.requestParams(map,APIType.REQUEST_REGISTER,new HttpCallback());
     }
-    public void login(String phone,String code){
-        if(!phone.equals(this.getPhone())||!code.equals(this.getCode())){
-            view.showInfo("验证码错误");
-            return;
-        }
+    public void login(String phone,String password){
         String date = DateUtil.getTimeStamp();
         Map<String,String> map=new HashMap<>();
         map.put("phone",phone);
         map.put("time",date);
-        map.put("code",code);
-        map.put("key",MD5Tool.getMD5(ContansString.APP_KEY + code + date));
+//        map.put("code",code);
+        map.put("key",MD5Tool.getMD5(ContansString.APP_KEY + password + date));
         Log.e("登陆发送参数",map.toString());
         HttpConnectUtil.requestParams(map,APIType.REQUEST_LOGIN,new HttpCallback());
     }

@@ -53,4 +53,12 @@
 
     <!-- 新闻 -->
     <string name="news_message">新闻详情</string>
+    <!-- 管理员信息 -->
+    <string name="user_message">管理员信息</string>
+    <string name="user_pic">头像</string>
+    <string name="nick_name">昵称</string>
+    <string name="sex">性别(男/女)</string>
+    <string name="birthday">生日(格式为yyyyMMdd)</string>
+    <string name="user_sign">签名</string>
+    <string name="update">修改</string>
 </resources>

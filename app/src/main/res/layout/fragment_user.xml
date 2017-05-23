@@ -14,6 +14,7 @@
         android:background="@color/blue">
 
         <RelativeLayout
+            android:id="@+id/setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -114,6 +115,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/check_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -146,6 +148,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/regular_reminders"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -173,6 +176,7 @@
                 android:background="@color/white"></View>
 
             <LinearLayout
+                android:id="@+id/like_me"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -200,6 +204,7 @@
                 android:background="@color/white"></View>
 
             <LinearLayout
+                android:id="@+id/invita_other"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -239,22 +244,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/user_sign"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/my_follow"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/textSize28px" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/my_fans"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/textSize28px" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
@@ -268,13 +266,22 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_card"
-            android:layout_margin="@dimen/activity_horizontal_margin">
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:visibility="visible">
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="极简主义新闻管理端"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/textSize32px"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -410,6 +417,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/user_sex_layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/login_editText_hight"
                     android:orientation="horizontal">
@@ -426,18 +434,21 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingTop="@dimen/small_hint"
-                        android:text="@string/my_message"
+                        android:text="我的性别"
                         android:textColor="@color/black"
                         android:textSize="@dimen/textSize28px"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="@dimen/activity_horizontal_margin"
-                        android:layout_height="@dimen/activity_horizontal_margin"
+                    <TextView
+                        android:id="@+id/user_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_chevron_right_gray"
-                        android:layout_marginRight="@dimen/login_hint"/>
+                        android:layout_marginRight="@dimen/login_hint"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize28px"/>
                 </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/user_brith_layout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/login_editText_hight"
                         android:orientation="horizontal">
@@ -446,7 +457,7 @@
                             android:layout_height="@dimen/activity_horizontal_margin"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -454,231 +465,17 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
+                            android:text="我的生日"
                             android:textColor="@color/black"
                             android:textSize="@dimen/textSize28px"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:layout_margin="@dimen/login_hint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_messages_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:id="@+id/user_brith"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/my_message"
                             android:textColor="@color/black"
                             android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:layout_margin="@dimen/login_hint"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_messages_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/my_message"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
-                            android:layout_marginRight="@dimen/login_hint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/login_editText_hight"
-                        android:orientation="horizontal">
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_dynamic_blue_24dp"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingTop="@dimen/small_hint"
-                            android:text="@string/new_dynamic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/textSize28px"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="@dimen/activity_horizontal_margin"
-                            android:layout_height="@dimen/activity_horizontal_margin"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_chevron_right_gray"
                             android:layout_marginRight="@dimen/login_hint"/>
                     </LinearLayout>
                 </LinearLayout>

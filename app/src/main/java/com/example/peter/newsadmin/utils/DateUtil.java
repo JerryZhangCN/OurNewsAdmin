@@ -29,9 +29,10 @@ public class DateUtil {
     public static final String FORMAT_DATE = "yyyy-MM-dd";
     public static final String FORMAT_DATE_SHORT = "MM.dd";
     public static final String FORMAT_DATE_HOUR = "HH:mm";
+    public static final String FORMAT_NO_SECOND = "yyyy-MM-dd HH:mm";
     public static final String FORMAT_ONLY_MONTH = "MM";
     public static final String FORMAT_ONLY_DAY = "dd";
-    public static final String FORMAT_NO_SECOND = "yyyy-MM-dd HH:mm";
+    public static final String FORMAT_ONLY_YAER = "yyyy";
 
 
     public static Date str2Date(String str) {

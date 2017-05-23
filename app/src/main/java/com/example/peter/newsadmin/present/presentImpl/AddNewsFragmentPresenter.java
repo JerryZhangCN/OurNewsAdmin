@@ -150,7 +150,7 @@ public class AddNewsFragmentPresenter extends BasePresenter {
                 }
                 case APIType.REQUEST_PUT_NEWS: {
                     {
-                        GsonResponseParser<String[]> parser = new GsonResponseParser<String[]>() {
+                        GsonResponseParser<User> parser = new GsonResponseParser<User>() {
                         };
                         CommonResponse response = parser.parse(responseT);
                         Log.e(ContansString.LOG_MSG, "上传新闻数据" + responseT);
