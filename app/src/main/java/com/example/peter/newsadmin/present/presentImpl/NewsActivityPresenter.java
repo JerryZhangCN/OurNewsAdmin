@@ -8,18 +8,14 @@ import com.example.peter.newsadmin.common.http.APIType;
 import com.example.peter.newsadmin.common.http.CommonResponse;
 import com.example.peter.newsadmin.common.http.GsonResponseParser;
 import com.example.peter.newsadmin.common.http.HttpConnectUtil;
-import com.example.peter.newsadmin.model.HomeNewsModel;
 import com.example.peter.newsadmin.model.NewsModel;
-import com.example.peter.newsadmin.model.RequestModel;
-import com.example.peter.newsadmin.model.TypeNewsMode;
+import com.example.peter.newsadmin.model.User;
 import com.example.peter.newsadmin.present.presentView.NewsActivityView;
-import com.example.peter.newsadmin.present.presentView.PageFragmentView;
 import com.example.peter.newsadmin.utils.StringUtil;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -35,11 +31,11 @@ public class NewsActivityPresenter extends BasePresenter {
         this.view = _view;
     }
 
-    public void getNews(int id) {
-        Gson gson = new Gson();
-        RequestModel requestModel = new RequestModel();
-        requestModel.setNid(id);
-        HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_GET_NEWS_CONTENT, new HttpCallback());
+    public void getNews(String id) {
+        Map<String,String> map=new HashMap<>();
+        map.put("nid",id);
+
+        HttpConnectUtil.requestParams(map,APIType.REQUEST_GET_NEWS_CONTENT, new HttpCallback());
     }
 
     private void handMsg(NewsModel model) {
@@ -76,7 +72,7 @@ public class NewsActivityPresenter extends BasePresenter {
 
             switch (id) {
 
-                case APIType.REQUEST_HOME_NEWS: {
+                case APIType.REQUEST_GET_NEWS_CONTENT: {
                     {
                         GsonResponseParser<NewsModel> parser = new GsonResponseParser<NewsModel>() {
                         };

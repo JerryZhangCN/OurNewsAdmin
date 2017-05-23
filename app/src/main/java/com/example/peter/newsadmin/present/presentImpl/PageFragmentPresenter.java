@@ -10,13 +10,16 @@ import com.example.peter.newsadmin.common.http.GsonResponseParser;
 import com.example.peter.newsadmin.common.http.HttpConnectUtil;
 import com.example.peter.newsadmin.model.HomeNewsModel;
 import com.example.peter.newsadmin.model.NewsModel;
+import com.example.peter.newsadmin.model.NewsModelVO;
 import com.example.peter.newsadmin.model.TypeNewsMode;
 import com.example.peter.newsadmin.present.presentView.PageFragmentView;
 import com.example.peter.newsadmin.utils.StringUtil;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -40,27 +43,27 @@ public class PageFragmentPresenter extends BasePresenter {
                 break;
             }
             default: {
-                HttpConnectUtil.request("", APIType.REQUEST_HOME_NEWS, new HttpCallback());
+                Map<String, String> map = new HashMap<>();
+                map.put("type", String.valueOf((id - 1)));
+                map.put("page", "1");
+                map.put("size", "10");
+                map.put("sort", "1");
+                HttpConnectUtil.requestParams(map, APIType.REQUEST_TYPE_NEWS, new HttpCallback());
                 break;
-//                Gson gson = new Gson();
-//                NewList requestModel = new NewList();
-//                requestModel.setType(id);
-//                requestModel.setPage(1);
-//                requestModel.setSize(10);
-//                requestModel.setSort(1);
-//                HttpConnectUtil.request(gson.toJson(requestModel).toString(), APIType.REQUEST_TYPE_NEWS, new HttpCallback());
-//                break;
             }
         }
     }
 
-    private void handMsg(List<TypeNewsMode> list) {
+    private void handMsg(List<TypeNewsMode> list, List<NewsModel> newsModel) {
         newsModels.clear();
-        for (TypeNewsMode item : list) {
-            for (int i = 0; i < item.getList().length; i++) {
-                this.newsModels.add(item.getList()[i]);
+        if (newsModel==null) {
+            for (TypeNewsMode item : list) {
+                for (int i = 0; i < item.getList().length; i++) {
+                    this.newsModels.add(item.getList()[i]);
+                }
             }
-        }
+        }else
+            newsModels.addAll(newsModel);
         view.updateMsg(this.newsModels);
     }
 
@@ -104,7 +107,7 @@ public class PageFragmentPresenter extends BasePresenter {
                             List<TypeNewsMode> list1 = new ArrayList<>();
                             for (int i = 0; i < list.length; i++)
                                 list1.add(list[i]);
-                            handMsg(list1);
+                            handMsg(list1,null);
                         } else {
 
                         }
@@ -113,16 +116,16 @@ public class PageFragmentPresenter extends BasePresenter {
                 }
                 case APIType.REQUEST_TYPE_NEWS: {
 
-                    GsonResponseParser<HomeNewsModel> parser = new GsonResponseParser<HomeNewsModel>() {
+                    GsonResponseParser<NewsModelVO> parser = new GsonResponseParser<NewsModelVO>() {
                     };
                     CommonResponse response = parser.parse(responseT);
                     Log.e(ContansString.LOG_MSG, "获取分类数据" + responseT);
                     if (isSuccess(response.getResult())) {
-                        TypeNewsMode[] list = ((HomeNewsModel) response.getData()).getNews();
-                        List<TypeNewsMode> list1 = new ArrayList<>();
-                        for (int i = 0; i < list.length; i++)
-                            list1.add(list[i]);
-                        handMsg(list1);
+//                        TypeNewsMode[] list = ((HomeNewsModel) response.getData()).getNews();
+//                        List<TypeNewsMode> list1 = new ArrayList<>();
+//                        for (int i = 0; i < list.length; i++)
+//                            list1.add(list[i]);
+                        handMsg(null,((NewsModelVO)response.getData()).getNews());
                     } else {
 
                     }

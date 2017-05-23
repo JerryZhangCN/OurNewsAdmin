@@ -50,4 +50,7 @@
     <string name="add_photo">添加图片</string>
     <string name="text">text</string>
     <string name="pic">pic</string>
+
+    <!-- 新闻 -->
+    <string name="news_message">新闻详情</string>
 </resources>

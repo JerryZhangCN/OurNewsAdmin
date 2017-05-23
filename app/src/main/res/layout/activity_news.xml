@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_news"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="com.example.peter.newsadmin.activity.NewsActivity">
 
-    <com.example.peter.newsadmin.common.vew.NewTextAndImageView
-        android:id="@+id/news_content"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/public_hint"
-        android:layout_marginTop="@dimen/public_hint"></com.example.peter.newsadmin.common.vew.NewTextAndImageView>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/news_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/public_hint"
+                    android:layout_height="@dimen/public_hint"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/public_hint"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/white_arrow_back" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/public_hint"
+                android:text="@string/news_message"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize36px" />
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/new_message_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/public_hint"
+            android:layout_marginRight="@dimen/public_hint"
+            android:paddingBottom="@dimen/public_hint"
+            android:paddingTop="@dimen/public_hint"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
